@@ -56,8 +56,13 @@ namespace TeamReflection.Controllers
                                      string BillingPostCode, 
                                      string BillingCounty)
         {
+            if (Username.Length < 1 || Fullname.Length < 1 || Password.Length < 1 || ConfirmPassword.Length < 1 || Email.Length < 1 || PhoneNumber.Length < 1 || BillingFirstLine.Length < 1 || BillingPostCode.Length < 1 || BillingCounty.Length < 1)
+            {
+                ViewBag.errorMessage = "Registration failed";
+                return View();
+            }
             //make a call to the database
-            DataTable data = DatabaseCall.Get(StoredProcedures.Procedures.sp_LoginAccount,
+            DataTable data = DatabaseCall.Get(StoredProcedures.Procedures.sp_RegisterAccount,
                                               new Dictionary<string, string>()
                                               {
                                                   { "@Username", Username },
@@ -73,11 +78,9 @@ namespace TeamReflection.Controllers
             if (data.Rows.Count > 0)
             {
                 //data was returned - successfull login
-                TempData["successMessage"] = "Login Successfull.";
+                TempData["successMessage"] = "Registration Successfull.";
                 return RedirectToAction("Index", "Home");
             }
-            //return view
-            ViewBag.errorMessage = "Login failed";
             return View();
         }
     }
