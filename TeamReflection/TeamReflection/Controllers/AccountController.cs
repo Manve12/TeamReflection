@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Web.Mvc;
 using TeamReflection.Data;
 using TeamReflection.Enum;
@@ -18,7 +19,13 @@ namespace TeamReflection.Controllers
         public ActionResult Login(string Username, string Password)
         {
             //make a call to the database
-            DataTable data = DatabaseCall.Get(StoredProcedures.Procedures.sp_LoginAccount);
+            DataTable data = DatabaseCall.Get(StoredProcedures.Procedures.sp_LoginAccount,
+                                              new Dictionary<string, string>()
+                                              {
+                                                  { "@Username", Username },
+                                                  { "@Password", Password }
+                                              }
+                );
             if (data.Rows.Count > 0)
             {
                 //data was returned - successfull login
@@ -26,7 +33,7 @@ namespace TeamReflection.Controllers
                 return RedirectToAction("Index","Home");
             }
             //return view
-            ViewBag.errorMessage = TempData["errorMessage"];
+            ViewBag.errorMessage = "Login failed";
             return View();
         }
 
