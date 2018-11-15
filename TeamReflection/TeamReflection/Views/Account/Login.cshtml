@@ -1,11 +1,16 @@
-﻿
+﻿@model TeamReflection.Models.AccountModel
 @{
     ViewBag.Title = "Login";
 }
 
 <h2>Login</h2>
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data", @class = "" }))
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "account-form" }))
 {
+    @Html.LabelFor(labelUsername => labelUsername.Username, "Username");
+    @Html.TextBoxFor(inputUsername => inputUsername.Username);
     
+    @Html.LabelFor(labelPassword => labelPassword.Password, "Password");
+    @Html.PasswordFor(inputPassword => inputPassword.Password);
+    <input type="submit" value="Login" />
 }
