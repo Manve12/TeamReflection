@@ -1,7 +1,43 @@
-﻿
+﻿@model TeamReflection.Models.AccountModel
 @{
     ViewBag.Title = "Register";
 }
 
 <h2>Register</h2>
 
+@if (ViewBag.errorMessage != null && ViewBag.errorMessage != "")
+{
+    <div class="">@ViewBag.errorMessage</div>
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "account-form" }))
+{
+    @Html.LabelFor(labelUsername => labelUsername.Username, "Username");
+    @Html.TextBoxFor(inputUsername => inputUsername.Username);
+
+    @Html.LabelFor(labelFullname => labelFullname.Fullname, "Full name");
+    @Html.TextBoxFor(inputFullname => inputFullname.Fullname);
+
+    @Html.LabelFor(labelPassword => labelPassword.Password, "Password");
+    @Html.PasswordFor(inputPassword => inputPassword.Password);
+
+    @Html.LabelFor(labelConfirmPassword => labelConfirmPassword.ConfirmPassword, "Confirm Password");
+    @Html.PasswordFor(inputConfirmPassword => inputConfirmPassword.ConfirmPassword);
+
+    @Html.LabelFor(labelEmail => labelEmail.Email, "Email");
+    @Html.TextBoxFor(inputEmail => inputEmail.Email);
+
+    @Html.LabelFor(labelPhoneNumber => labelPhoneNumber.PhoneNumber, "Phone Number");
+    @Html.TextBoxFor(inputPhoneNumber => inputPhoneNumber.PhoneNumber);
+
+    @Html.LabelFor(labelBillingFirstLine => labelBillingFirstLine.BillingFirstLine, "Billing First Line");
+    @Html.TextBoxFor(inputBillingFirstLine => inputBillingFirstLine.BillingFirstLine);
+
+    @Html.LabelFor(labelBillingPostCode => labelBillingPostCode.BillingPostCode, "Billing Post Code");
+    @Html.TextBoxFor(inputBillingPostCode => inputBillingPostCode.BillingPostCode);
+
+    @Html.LabelFor(labelBillingCounty => labelBillingCounty.BillingCounty, "Billing County");
+    @Html.TextBoxFor(inputBillingCounty => inputBillingCounty.BillingCounty);
+
+    <input type="submit" value="Login" />
+}
