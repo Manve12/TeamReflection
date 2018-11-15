@@ -31,6 +31,10 @@
         </div>
     </div>
     <div class="container body-content">
+        @if (TempData["successMessage"] != null && (string)TempData["successMessage"] != "")
+        {
+            <div class="">@TempData["successMessage"]</div>
+        }
         @RenderBody()
         <hr />
         <footer>
