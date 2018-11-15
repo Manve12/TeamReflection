@@ -10,7 +10,7 @@ namespace TeamReflection.Data
 {
     public static class DatabaseCall
     {
-        public static DataTable Get(StoredProcedures.Procedures procedure)
+        public static DataTable Get(StoredProcedures.Procedures procedure, Dictionary<string, string> parameters)
         {
             string procedureName = GetProcedureName(procedure);
 
@@ -22,6 +22,11 @@ namespace TeamReflection.Data
             SqlCommand cmd = DbConnect.ConnectionDatabase.CreateCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = procedureName;
+
+            foreach (var param in parameters)
+            {
+                cmd.Parameters.AddWithValue(param.Key, param.Value);
+            }
 
             cmd.CommandTimeout = DbConnect.ConnectionTimeout;
 
