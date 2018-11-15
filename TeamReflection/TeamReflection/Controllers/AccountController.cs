@@ -77,7 +77,7 @@ namespace TeamReflection.Controllers
                 );
             if (data.Rows.Count > 0)
             {
-                //data was returned - successfull login
+                //data was returned - successfull registration
                 TempData["successMessage"] = "Registration Successfull.";
                 return RedirectToAction("Index", "Home");
             }
